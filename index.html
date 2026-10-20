@@ -12,11 +12,9 @@
     :root {
       --bg: #101010;
       --panel: #191919;
-      --panel-light: #242424;
       --text: #ededed;
       --muted: #929292;
       --line: #363636;
-      --accent: #c9c9c9;
     }
 
     * { box-sizing: border-box; }
@@ -32,17 +30,17 @@
     }
 
     button, a { font: inherit; }
-
     a { color: inherit; text-decoration: none; }
 
     .topbar {
-      height: 72px;
+      min-height: 72px;
       padding: 0 7%;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 15px;
       border-bottom: 1px solid var(--line);
-      background: rgba(16, 16, 16, 0.94);
+      background: #101010;
     }
 
     .brand {
@@ -65,12 +63,11 @@
       background: #aaa;
       border-radius: 50%;
       margin-right: 9px;
-      vertical-align: middle;
     }
 
     .hero {
-      min-height: 580px;
-      padding: 90px 8% 85px;
+      min-height: 560px;
+      padding: 90px 8%;
       display: flex;
       align-items: center;
       position: relative;
@@ -134,6 +131,7 @@
     }
 
     .btn {
+      display: inline-block;
       border: 1px solid #555;
       background: transparent;
       color: white;
@@ -158,8 +156,9 @@
     }
 
     .section {
-      padding: 85px 8%;
+      padding: 80px 8%;
       border-bottom: 1px solid var(--line);
+      scroll-margin-top: 20px;
     }
 
     .section-heading {
@@ -234,8 +233,7 @@
       position: relative;
       overflow: hidden;
       border: 1px solid var(--line);
-      background:
-        linear-gradient(145deg, #292929, #141414);
+      background: linear-gradient(145deg, #292929, #141414);
       cursor: pointer;
     }
 
@@ -252,7 +250,7 @@
     .placeholder {
       position: absolute;
       inset: 0;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       flex-direction: column;
@@ -260,6 +258,10 @@
       color: #707070;
       text-align: center;
       padding: 10px;
+    }
+
+    .gallery-card:not(.has-image) .placeholder {
+      display: flex;
     }
 
     .placeholder .plus {
@@ -272,8 +274,6 @@
       letter-spacing: 0.15em;
     }
 
-    .gallery-card.has-image .placeholder { display: none; }
-
     .image-caption {
       position: absolute;
       left: 0;
@@ -284,6 +284,7 @@
       font-size: 10px;
       letter-spacing: 0.16em;
       z-index: 2;
+      pointer-events: none;
     }
 
     .archive-note {
@@ -346,7 +347,7 @@
       position: absolute;
       top: 20px;
       right: 25px;
-      background: none;
+      background: #191919;
       border: 1px solid #555;
       color: white;
       padding: 12px 16px;
@@ -359,12 +360,14 @@
     }
 
     @media (max-width: 650px) {
-      .topbar { height: 60px; padding: 0 6%; }
+      .topbar { min-height: 60px; padding: 0 6%; }
       .status { font-size: 8px; }
-      .hero { min-height: 480px; padding: 70px 7%; }
-      .section { padding: 65px 7%; }
-      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-      .gallery-card { aspect-ratio: 3 / 4; }
+      .hero { min-height: 460px; padding: 70px 7%; }
+      .section { padding: 60px 7%; }
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
       .section-heading { align-items: start; }
       .section-count { padding-top: 4px; }
       .quote-section { padding: 65px 7%; }
@@ -395,7 +398,7 @@
 
         <div class="actions">
           <button class="btn btn-primary" id="infoButton"
-                  aria-expanded="false" aria-controls="infoPanel">
+            aria-expanded="false" aria-controls="infoContent">
             + &nbsp; INFO
           </button>
           <a class="btn" href="#gallery">VIEW GALLERY &nbsp; ↘</a>
@@ -403,7 +406,7 @@
       </div>
     </section>
 
-    <section class="section" id="infoPanel" aria-label="Character information">
+    <section class="section" id="infoPanel">
       <div class="section-heading">
         <div>
           <div class="section-label">01 / PERSONNEL FILE</div>
@@ -428,45 +431,55 @@
           <div class="section-label">02 / VISUAL RECORDS</div>
           <h2>The gallery.</h2>
         </div>
-        <div class="section-count">IMAGE ARCHIVE / 06 SLOTS</div>
+        <div class="section-count">IMAGE ARCHIVE / 06 FILES</div>
       </div>
 
       <div class="gallery-grid" id="galleryGrid">
         <div class="gallery-card">
-          <img src="images/mr-fly-01.jpg" alt="Mr. Fly image 1">
-          <div class="placeholder"><span class="plus">+</span><small>ADD IMAGE 01</small></div>
+          <img src="1ae2a468f7db76b3727e7355dae562cc.jpg"
+            alt="Mr. Fly image 1" loading="lazy">
+          <div class="placeholder"><span class="plus">+</span><small>FILE 001</small></div>
           <div class="image-caption">FILE 001 / PORTRAIT</div>
         </div>
+
         <div class="gallery-card">
-          <img src="images/mr-fly-02.jpg" alt="Mr. Fly image 2">
-          <div class="placeholder"><span class="plus">+</span><small>ADD IMAGE 02</small></div>
+          <img src="9c0f5d8deb329b283fe10e625b0e446e.jpg"
+            alt="Mr. Fly image 2" loading="lazy">
+          <div class="placeholder"><span class="plus">+</span><small>FILE 002</small></div>
           <div class="image-caption">FILE 002 / PROFILE</div>
         </div>
+
         <div class="gallery-card">
-          <img src="images/mr-fly-03.jpg" alt="Mr. Fly image 3">
-          <div class="placeholder"><span class="plus">+</span><small>ADD IMAGE 03</small></div>
+          <img src="Batman-Essential-Modern-Age-2.jpg"
+            alt="Mr. Fly image 3" loading="lazy">
+          <div class="placeholder"><span class="plus">+</span><small>FILE 003</small></div>
           <div class="image-caption">FILE 003 / ARCHIVE</div>
         </div>
+
         <div class="gallery-card">
-          <img src="images/mr-fly-04.jpg" alt="Mr. Fly image 4">
-          <div class="placeholder"><span class="plus">+</span><small>ADD IMAGE 04</small></div>
+          <img src="Batman_1_preview_2.jpg"
+            alt="Mr. Fly image 4" loading="lazy">
+          <div class="placeholder"><span class="plus">+</span><small>FILE 004</small></div>
           <div class="image-caption">FILE 004 / FIELD NOTES</div>
         </div>
+
         <div class="gallery-card">
-          <img src="images/mr-fly-05.jpg" alt="Mr. Fly image 5">
-          <div class="placeholder"><span class="plus">+</span><small>ADD IMAGE 05</small></div>
+          <img src="IMG_1223626f-2832-4742-8806-977956a34f7f.jpg"
+            alt="Mr. Fly image 5" loading="lazy">
+          <div class="placeholder"><span class="plus">+</span><small>FILE 005</small></div>
           <div class="image-caption">FILE 005 / CLASSIFIED</div>
         </div>
+
         <div class="gallery-card">
-          <img src="images/mr-fly-06.jpg" alt="Mr. Fly image 6">
-          <div class="placeholder"><span class="plus">+</span><small>ADD IMAGE 06</small></div>
+          <img src="whos-more-intimidating-v0-2dyxw9tinnle1.jpg"
+            alt="Mr. Fly image 6" loading="lazy">
+          <div class="placeholder"><span class="plus">+</span><small>FILE 006</small></div>
           <div class="image-caption">FILE 006 / LEGACY</div>
         </div>
       </div>
 
       <p class="archive-note">
-        VISUAL ARCHIVE // Six image slots ready for your collection.
-        Add your pictures to the images folder using the filenames shown.
+        VISUAL ARCHIVE // Six files recovered. Select any image to view it in detail.
       </p>
     </section>
 
@@ -483,7 +496,7 @@
   </footer>
 
   <div class="lightbox" id="lightbox" role="dialog"
-       aria-label="Expanded gallery image" aria-modal="true">
+    aria-label="Expanded gallery image" aria-modal="true">
     <button class="close-lightbox" id="closeLightbox">CLOSE ✕</button>
     <img id="lightboxImage" src="" alt="Expanded Mr. Fly image">
   </div>
@@ -495,13 +508,17 @@
 
     infoButton.addEventListener("click", () => {
       const isOpen = infoContent.classList.toggle("open");
+
       infoButton.setAttribute("aria-expanded", String(isOpen));
       infoButton.innerHTML = isOpen
         ? "− &nbsp; HIDE INFO"
         : "+ &nbsp; INFO";
 
       if (isOpen) {
-        infoPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        infoPanel.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
       }
     });
 
@@ -512,23 +529,22 @@
     document.querySelectorAll(".gallery-card").forEach(card => {
       const img = card.querySelector("img");
 
-      img.addEventListener("load", () => {
-        card.classList.add("has-image");
-      });
-
-      img.addEventListener("error", () => {
-        card.classList.remove("has-image");
-      });
-
-      if (img.complete && img.naturalWidth > 0) {
-        card.classList.add("has-image");
+      function updateImageState() {
+        card.classList.toggle("has-image", img.naturalWidth > 0);
       }
+
+      img.addEventListener("load", updateImageState);
+      img.addEventListener("error", updateImageState);
+
+      if (img.complete) updateImageState();
 
       card.addEventListener("click", () => {
         if (!img.complete || img.naturalWidth === 0) return;
+
         lightboxImage.src = img.src;
         lightboxImage.alt = img.alt;
         lightbox.classList.add("open");
+        closeLightbox.focus();
       });
     });
 
